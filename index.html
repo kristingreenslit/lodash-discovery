@@ -3,59 +3,31 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Coding Challenge</title>
-<!--   <link rel="stylesheet" type="text/css" href="site.css"> -->
+  <title>Lodash Discovery</title>
 </head>
 <body>
-  <div>hello world!</div>
+  <ul id='vehicleList'>
+  	<li class='cars'>Audi</li>
+  	<li class='cars'>Mercedes</li>
+  	<li class='cars'>BMW</li>
+  </ul>
 </body>
-<!-- <script type="text/javascript" src="site.js"></script>  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script>
 
-var planets = [
-  {planet: 'Mercury', position: 1},
-  {planet: 'Venus', position: 2},
-  {planet: 'Earth', position: 3},
-  {planet: 'Mars', position: 4},
-  {planet: 'Jupiter', position: 5},
-  {planet: 'Saturn', position: 6},
-  {planet: 'Uranus', position: 7},
-  {planet: 'Neptune', position: 8}
-];
+// _.each(collection, [iteratee=_.identity])
+// lodash documentation: Iterates over elements of collection and invokes iteratee for each element. The iteratee is invoked with three 
+// arguments: (value, index|key, collection). Iteratee functions may exit iteration early by explicitly returning false.
 
-var planetNames = [];
-
-function extractPlanetNames(planets) {
-  planetNames.push([planets.planet]);
+const carArr = [];
+const cars = document.getElementsByTagName('li');
+ 
+for (let value of cars) {
+  carArr.push(value.outerText);
+  setTimeout(function() {
+    console.log(carArr.shift([0]).toUpperCase());
+  }, 1000);
 }
-
-// lodash _.each() and vanilla JavaScript forEach()
-_.each(planets, function(planet) {
-  console.log(planet.position);
-});
-
-planets.forEach(function(planet) {
-  console.log(planet.position);
-});
-
-// lodash _.map and vanilla JavaScript .map()
-_.map(planets, extractPlanetNames);
-
-planets.map(extractPlanetNames);
-
-// lodash _.reduce and vanilla JavaScript .reduce()
-var flattenedPlanetNamesLodash = _.reduce(planetNames, function(result, planets) {
-  return result.concat(planets);
-},[]);
-
-var flattenedPlanetNames = planetNames.reduce(function(result, planets) {
-  return result.concat(planets);
-},[]);
-
-console.log(planetNames);
-console.log(flattenedPlanetNamesLodash);
-console.log(flattenedPlanetNames);
 
 </script>
 </html>
