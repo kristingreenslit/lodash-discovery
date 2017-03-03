@@ -12,46 +12,42 @@
   	<li class='cars'>2014 BMW</li>
   </ul>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script>
 
-// _.each
+// Lodash _.each
+
 const carModels = [];
-const carElements = document.getElementsByTagName('li');
+const cars = document.getElementsByTagName('li');
 
 // iterate over elements in a collection and invoke iteratee for each element (DOM nodes in this case)
-for (let value of carElements) {
-  carModels.push(value.outerText);
+for (let car of cars) {
+  const carElements = car.outerText;
+  const carDigits = carElements.split('', 4);
+  const carYears = carDigits.join('');
+  const carYearsAsIntegers = parseInt(carYears);
+  carModels.push(carYearsAsIntegers);
   // immediately invoke function for each iteratee
-  setTimeout(function() {
-    console.log(carModels.shift([0]).toUpperCase());
-  }, 1000);
+  // setTimeout(function() {
+  //   console.log(carModels.shift([0]).toUpperCase());
+  // }, 1000);
 }
 
-// _.map
-// create an array of values by running each element in collection thru iteratee and returning new array
-const modelYears = carModels.map(function(model) {
-  const carDigits = model.split('', 4);
-  const carYears = carDigits.join('');
-  const yearIntegers = parseInt(carYears);
-  return yearIntegers;
+
+// Lodash _.map
+
+// create an array of values by running each element in collection thru iteratee, then return new array
+function getAnnualMileage(model, index, carModels) {
+  const currentYear = new Date().getFullYear();
+  const carYearDifference = currentYear - model;
+  return carYearDifference * this.average;
+};
+
+// set value of 'this' object to pass to getAnnualMileage()
+const modelYears = carModels.map(getAnnualMileage, {
+  average: 12000
 });
 
 console.log(modelYears);
-
-// function calculateMileage(year, index, carArr, newArr) {
-//   console.log(year, index, carArr, newArr);
-//   const yearInteger = parseInt(year);
-//   const currentYear = new Date().getFullYear();
-//   const carYearDifference = (currentYear - yearInteger) * 12000;
-//   console.log(carYearDifference);
-// }
-
-// array.map(function(currentValue, index, arr), thisValue)
-
-// _.map(collection, [iteratee=_.identity])
-// Creates an array of values by running each element in collection thru iteratee. The iteratee is invoked with three arguments:
-// (value, index|key, collection).
 
 // _.reduce(collection, [iteratee=_.identity], [accumulator])
 // Reduces collection to a value which is the accumulated result of running each element in collection thru iteratee, where each successive 
