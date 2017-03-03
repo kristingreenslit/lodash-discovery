@@ -7,27 +7,56 @@
 </head>
 <body>
   <ul id='vehicleList'>
-  	<li class='cars'>Audi</li>
-  	<li class='cars'>Mercedes</li>
-  	<li class='cars'>BMW</li>
+  	<li class='cars'>2012 Audi</li>
+  	<li class='cars'>2008 Mercedes</li>
+  	<li class='cars'>2014 BMW</li>
   </ul>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script>
 
-// _.each(collection, [iteratee=_.identity])
-// lodash documentation: Iterates over elements of collection and invokes iteratee for each element. The iteratee is invoked with three 
-// arguments: (value, index|key, collection). Iteratee functions may exit iteration early by explicitly returning false.
+// _.each
+const carModels = [];
+const carElements = document.getElementsByTagName('li');
 
-const carArr = [];
-const cars = document.getElementsByTagName('li');
- 
-for (let value of cars) {
-  carArr.push(value.outerText);
+// iterate over elements in a collection and invoke iteratee for each element (DOM nodes in this case)
+for (let value of carElements) {
+  carModels.push(value.outerText);
+  // immediately invoke function for each iteratee
   setTimeout(function() {
-    console.log(carArr.shift([0]).toUpperCase());
+    console.log(carModels.shift([0]).toUpperCase());
   }, 1000);
 }
+
+// _.map
+// create an array of values by running each element in collection thru iteratee and returning new array
+const modelYears = carModels.map(function(model) {
+  const carDigits = model.split('', 4);
+  const carYears = carDigits.join('');
+  const yearIntegers = parseInt(carYears);
+  return yearIntegers;
+});
+
+console.log(modelYears);
+
+// function calculateMileage(year, index, carArr, newArr) {
+//   console.log(year, index, carArr, newArr);
+//   const yearInteger = parseInt(year);
+//   const currentYear = new Date().getFullYear();
+//   const carYearDifference = (currentYear - yearInteger) * 12000;
+//   console.log(carYearDifference);
+// }
+
+// array.map(function(currentValue, index, arr), thisValue)
+
+// _.map(collection, [iteratee=_.identity])
+// Creates an array of values by running each element in collection thru iteratee. The iteratee is invoked with three arguments:
+// (value, index|key, collection).
+
+// _.reduce(collection, [iteratee=_.identity], [accumulator])
+// Reduces collection to a value which is the accumulated result of running each element in collection thru iteratee, where each successive 
+// invocation is supplied the return value of the previous. If accumulator is not given, the first element of collection is used as the 
+// initial value. The iteratee is invoked with four arguments: (accumulator, value, index|key, collection).
 
 </script>
 </html>
