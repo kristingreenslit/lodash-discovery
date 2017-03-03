@@ -14,7 +14,7 @@
 </body>
 <script>
 
-// Lodash _.each
+// ---------- _.each ---------- //
 
 const carModels = [];
 const cars = document.getElementsByTagName('li');
@@ -33,7 +33,7 @@ for (let car of cars) {
 }
 
 
-// Lodash _.map
+// ---------- _.map ---------- //
 
 // create an array of values by running each element in collection thru iteratee, then return new array
 function getAnnualMileage(model, index, carModels) {
@@ -47,12 +47,14 @@ const modelYears = carModels.map(getAnnualMileage, {
   average: 12000
 });
 
-console.log(modelYears);
 
-// _.reduce(collection, [iteratee=_.identity], [accumulator])
-// Reduces collection to a value which is the accumulated result of running each element in collection thru iteratee, where each successive 
-// invocation is supplied the return value of the previous. If accumulator is not given, the first element of collection is used as the 
-// initial value. The iteratee is invoked with four arguments: (accumulator, value, index|key, collection).
+// ---------- _.reduce ---------- //
+
+// Reduce collection to a value which is the accumulated result of running each element in collection thru iteratee, 
+// where each successive invocation is supplied the return value of the previous. 
+const mileageSum = modelYears.reduce((accumulator, initialValue, index, modelYear) => {
+  return accumulator + initialValue;
+}, 0);
 
 </script>
 </html>
