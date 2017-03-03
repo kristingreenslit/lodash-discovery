@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang='en-US'>
 <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <title>Lodash Discovery</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 const carModels = [];
 const cars = document.getElementsByTagName('li');
 
-// iterate over elements in a collection and invoke iteratee for each element (DOM nodes in this case)
+// Iterate over elements in a collection and invoke iteratee for each element (DOM nodes in this case)
 for (let car of cars) {
   const carElements = car.outerText;
   const carDigits = carElements.split('', 4);
@@ -32,32 +32,31 @@ for (let car of cars) {
   }, 1000);
 }
 
-
 // ---------- _.map ---------- //
 
-// create an array of values by running each element in collection thru iteratee, then return new array
+// Create an array of values by running each element in collection through iteratee, then return a new array
 function getAnnualMileage(model) {
   const currentYear = new Date().getFullYear();
   const carYearDifference = currentYear - model;
   return carYearDifference * this.average;
 };
 
-// set value of 'this' object to pass to getAnnualMileage()
+// Set value of 'this' object to pass to getAnnualMileage()
 const modelYears = carModels.map(getAnnualMileage, {
   average: 12000
 });
 
-
 // ---------- _.reduce ---------- //
 
-// function invoked per iteration to provide value for mileageSum
+// Function invoked per iteration to provide value for mileageSum
 function addMileage(firstYear, secondYear) {
   return firstYear + secondYear;
 }
 
-// Reduce collection to a value which is the accumulated result of running each element in collection thru iteratee, 
-// where each successive invocation is supplied the return value of the previous. 
+// Reduce collection to a value which is the accumulated result of running each element in collection through iteratee, 
+// where each successive invocation is supplied the return value of the previous
 const mileageSum = modelYears.reduce(addMileage, 0);
+console.log('Estimated Mileage for all vehicles = ', mileageSum);
 
 </script>
 </html>
