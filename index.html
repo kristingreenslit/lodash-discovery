@@ -27,16 +27,16 @@ for (let car of cars) {
   const carYearsAsIntegers = parseInt(carYears);
   carModels.push(carYearsAsIntegers);
   // immediately invoke function for each iteratee
-  // setTimeout(function() {
-  //   console.log(carModels.shift([0]).toUpperCase());
-  // }, 1000);
+  setTimeout(function() {
+    console.log(carElements.toUpperCase());
+  }, 1000);
 }
 
 
 // ---------- _.map ---------- //
 
 // create an array of values by running each element in collection thru iteratee, then return new array
-function getAnnualMileage(model, index, carModels) {
+function getAnnualMileage(model) {
   const currentYear = new Date().getFullYear();
   const carYearDifference = currentYear - model;
   return carYearDifference * this.average;
@@ -50,11 +50,14 @@ const modelYears = carModels.map(getAnnualMileage, {
 
 // ---------- _.reduce ---------- //
 
+// function invoked per iteration to provide value for mileageSum
+function addMileage(firstYear, secondYear) {
+  return firstYear + secondYear;
+}
+
 // Reduce collection to a value which is the accumulated result of running each element in collection thru iteratee, 
 // where each successive invocation is supplied the return value of the previous. 
-const mileageSum = modelYears.reduce((accumulator, initialValue, index, modelYear) => {
-  return accumulator + initialValue;
-}, 0);
+const mileageSum = modelYears.reduce(addMileage, 0);
 
 </script>
 </html>
