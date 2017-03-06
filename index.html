@@ -15,16 +15,18 @@ const carArray = ['Audi', 'Mercedes', 'BMW'];
 const carObject = {type: 'Audi', year: 2013, model: 'A6'};
 const carString = 'car';
 
-var checkType = function(obj) {
+var checkType = function(collection) {
   // access native [[Class]] property in object with call(), then search string for a match with Regex
-  let objType = Object.prototype.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-
-  console.log(objType);
+  let objType = Object.prototype.toString.call(collection).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 
   if (objType === 'array') {
-    console.log('array worked');
+    for (let i = 0; i < collection.length; i++) {
+      mapIt(collection[i], i);
+    }
   } else if (objType === 'object') {
-    console.log('object worked');
+    for (var prop in collection) {
+      mapIt(prop, collection[prop]);
+    }
   } else {
     console.log('not an object or array');
   }
@@ -33,6 +35,10 @@ var checkType = function(obj) {
 checkType(carArray);
 checkType(carObject);
 checkType(carString);
+
+function mapIt(obj, i) {
+  console.log(obj, i);
+}
 
 
 // ---------- _.map ---------- //
