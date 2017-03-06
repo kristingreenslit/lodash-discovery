@@ -6,57 +6,43 @@
   <title>Lodash Discovery</title>
 </head>
 <body>
-  <ul id='vehicleList'>
-    <li class='cars'>2012 Audi</li>
-    <li class='cars'>2008 Mercedes</li>
-    <li class='cars'>2014 BMW</li>
-  </ul>
 </body>
 <script>
 
 // ---------- _.each ---------- //
 
-const carModels = [];
-const cars = document.getElementsByTagName('li');
+const carArray = ['Audi', 'Mercedes', 'BMW'];
+const carObject = {type: 'Audi', year: 2013, model: 'A6'};
 
-// Iterate over elements in a collection and invoke iteratee for each element (DOM nodes in this case)
-for (let car of cars) {
-  const carElements = car.outerText;
-  const carDigits = carElements.split('', 4);
-  const carYears = carDigits.join('');
-  const carYearsAsIntegers = parseInt(carYears);
-  carModels.push(carYearsAsIntegers);
-  // immediately invoke function for each iteratee
-  setTimeout(function() {
-    console.log(carElements.toUpperCase());
-  }, 1000);
+var checkType = function(obj) {
+  // access native [[Class]] property in object with call(), then search string for a match with Regex
+  console.log(Object.prototype.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase());
 }
+
+checkType(carArray);
+checkType(carObject);
+
+// console.log(typeof(carArray));
+// console.log(typeof(carObject));
+
+function each(carArray, cb) {
+  // if Array
+  if (Array.isArray(carArray) === true) {
+    for (var i = 0; i < carArray.length; i++) {
+      cb(carArray[i], i);
+    }
+  }
+  // if Object
+
+  // if none of the above
+}
+
 
 // ---------- _.map ---------- //
 
-// Create an array of values by running each element in collection through iteratee, then return a new array
-function getAnnualMileage(model) {
-  const currentYear = new Date().getFullYear();
-  const carYearDifference = currentYear - model;
-  return carYearDifference * this.average;
-};
-
-// Set value of 'this' object to pass to getAnnualMileage()
-const modelYears = carModels.map(getAnnualMileage, {
-  average: 12000
-});
 
 // ---------- _.reduce ---------- //
 
-// Function invoked per iteration to provide value for mileageSum
-function addMileage(firstYear, secondYear) {
-  return firstYear + secondYear;
-}
-
-// Reduce collection to a value which is the accumulated result of running each element in collection through iteratee, 
-// where each successive invocation is supplied the return value of the previous
-const mileageSum = modelYears.reduce(addMileage, 0);
-console.log('Estimated Mileage for all vehicles = ', mileageSum);
 
 </script>
 </html>
