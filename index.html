@@ -9,36 +9,42 @@
 </body>
 <script>
 
-// ---------- _.each ---------- //
+// const collection = ['Audi', 'Mercedes', 'BMW'];
+const collection = {type: 'Audi', year: 2013, model: 'A6'};
+// const carString = 'car';
 
-const carArray = ['Audi', 'Mercedes', 'BMW'];
-const carObject = {type: 'Audi', year: 2013, model: 'A6'};
-const carString = 'car';
+function isArray(collection) {
+  for (let i = 0; i < collection.length; i++) {
+    console.log(i, collection[i]);
+  }
+}
 
-var checkType = function(collection) {
-  // access native [[Class]] property in object with call(), then search string for a match with Regex
+function isObject(collection) {
+  for (var prop in collection) {
+    console.log(prop, collection[prop]);
+  }
+}
+
+function checkType(collection) {
   let objType = Object.prototype.toString.call(collection).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+  console.log(objType);
 
   if (objType === 'array') {
-    for (let i = 0; i < collection.length; i++) {
-      mapIt(collection[i], i);
-    }
+    isArray(collection);
   } else if (objType === 'object') {
-    for (var prop in collection) {
-      mapIt(prop, collection[prop]);
-    }
+    isObject(collection);
   } else {
     console.log('not an object or array');
   }
 }
 
-checkType(carArray);
-checkType(carObject);
-checkType(carString);
+checkType(collection);
 
-function mapIt(obj, i) {
-  console.log(obj, i);
-}
+// ---------- _.each ---------- //
+
+// each(collection, function(item, i) {
+//   console.log(item, i);
+// });
 
 
 // ---------- _.map ---------- //
