@@ -13,29 +13,26 @@
 
 const carArray = ['Audi', 'Mercedes', 'BMW'];
 const carObject = {type: 'Audi', year: 2013, model: 'A6'};
+const carString = 'car';
 
 var checkType = function(obj) {
   // access native [[Class]] property in object with call(), then search string for a match with Regex
-  console.log(Object.prototype.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase());
+  let objType = Object.prototype.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+
+  console.log(objType);
+
+  if (objType === 'array') {
+    console.log('array worked');
+  } else if (objType === 'object') {
+    console.log('object worked');
+  } else {
+    console.log('not an object or array');
+  }
 }
 
 checkType(carArray);
 checkType(carObject);
-
-// console.log(typeof(carArray));
-// console.log(typeof(carObject));
-
-function each(carArray, cb) {
-  // if Array
-  if (Array.isArray(carArray) === true) {
-    for (var i = 0; i < carArray.length; i++) {
-      cb(carArray[i], i);
-    }
-  }
-  // if Object
-
-  // if none of the above
-}
+checkType(carString);
 
 
 // ---------- _.map ---------- //
